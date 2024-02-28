@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            margin-top: 30px;
+            background-color: #E6BAA3;
+            font-family: "Mukta", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mx-auto" style="max-width: 600px; min-width: 600px; text-align: right;">
+        <a href="{{ url_for('logout') }}" class="btn btn-outline-dark btn-sm">
+            LOGOUT
+        </a>
+    </div>
+    <div>
+        <h1 class="mt-4 text-center">
+            Loan Eligibility Calculator
+        </h1>
+    </div>
+    <div class="card mx-auto" style="max-width: 600px; min-width: 600px;">
+        <h3
+            style="color: rgb(255, 255, 255); background-color: #A94438; padding: 15px; text-align: center; font-weight: bold;">
+            {{ prediction }}
+        </h3>
+        <form class="p-4" action="{{ url_for('enter_details')}}" method="post">
+            <div class="form-group row">
+                <label for="gender" class="col-6 col-form-label">
+                    Gender
+                </label>
+                <div class="col-6">
+                    <select id="gender" name="gender" class="custom-select" required="required">
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="married" class="col-6 col-form-label">
+                    Married
+                </label>
+                <div class="col-6">
+                    <select id="married" name="married" class="custom-select" required="required">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="dependents" class="col-6 col-form-label">
+                    Dependents
+                </label>
+                <div class="col-6">
+                    <input id="dependents" name="dependents" type="text" class="form-control" required="required">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="education" class="col-6 col-form-label">
+                    Education
+                </label>
+                <div class="col-6">
+                    <select id="education" name="education" class="custom-select" required="required">
+                        <option value="0">Graduate</option>
+                        <option value="1">Non Graduate</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="self_employed" class="col-6 col-form-label">
+                    Self Employed
+                </label>
+                <div class="col-6">
+                    <select id="self_employed" name="self_employed" class="custom-select" required="required">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="applicant_income" class="col-6 col-form-label">
+                    Applicant's Income ($)
+                </label>
+                <div class="col-6">
+                    <input id="applicant_income" name="applicant_income" type="text" class="form-control"
+                        required="required">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="coapplicant_income" class="col-6 col-form-label">
+                    Co-Applicant's Income ($)
+                </label>
+                <div class="col-6">
+                    <input id="coapplicant_income" name="coapplicant_income" type="text" class="form-control"
+                        required="required">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="loan_amount" class="col-6 col-form-label">
+                    Loan Amount ($)
+                </label>
+                <div class="col-6">
+                    <input id="loan_amount" name="loan_amount" type="text" class="form-control" required="required">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="loan_amount_term" class="col-6 col-form-label">
+                    Loan Term (In Months)
+                </label>
+                <div class="col-6">
+                    <input id="loan_amount_term" name="loan_amount_term" type="text" class="form-control"
+                        required="required">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="credit_history" class="col-6 col-form-label">
+                    Credit History
+                </label>
+                <div class="col-6">
+                    <select id="credit_history" name="credit_history" class="custom-select">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="property_area" class="col-6 col-form-label">
+                    Property Area
+                </label>
+                <div class="col-6">
+                    <select id="property_area" name="property_area" class="custom-select">
+                        <option value="0">Rural</option>
+                        <option value="1">Semi Urban</option>
+                        <option value="2">Urban</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="mx-auto p-4">
+                    <button name="submit" type="submit" class="btn btn-dark">
+                        Submit Form
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <footer class="bg-light text-center text-lg-start p-4 mt-3">
+        <div>
+            <script>
+                document.write(new Date().getFullYear());
+            </script>
+            - Great Learning PDS-3 Graded Project.
+        </div>
+    </footer>
+</body>
+
+</html>
